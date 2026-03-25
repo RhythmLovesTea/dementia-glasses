@@ -4,16 +4,20 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const api = axios.create({
   baseURL: BASE_URL,
-  timeout: 15000,
+  timeout: 30000,
 });
 
 // ── Face ─────────────────────────────────────────────────────────────────────
 
+/**
+ * Upload a photo and register the face encoding.
+ * Returns { face_index, photo_url }
+ */
 export const registerFace = async (imageBlob, filename = 'face.jpg') => {
   const form = new FormData();
   form.append('file', imageBlob, filename);
   const { data } = await api.post('/api/face/register', form);
-  return data; // { person_id }
+  return data; // { face_index, photo_url }
 };
 
 export const recognizeFace = async (imageBlob, filename = 'frame.jpg') => {
@@ -23,19 +27,7 @@ export const recognizeFace = async (imageBlob, filename = 'frame.jpg') => {
   return data; // { match_id }
 };
 
-// ── Memories ──────────────────────────────────────────────────────────────────
-
-export const getMemories = async (personId) => {
-  const { data } = await api.get(`/api/memory/${personId}`);
-  return data;
-};
-
-export const addMemory = async (personId, memory) => {
-  const { data } = await api.post(`/api/memory/${personId}`, memory);
-  return data;
-};
-
-// ── Person ────────────────────────────────────────────────────────────────────
+// ── People ────────────────────────────────────────────────────────────────────
 
 export const getPeople = async () => {
   const { data } = await api.get('/api/memory/people');
@@ -50,6 +42,36 @@ export const getPerson = async (personId) => {
 export const createPerson = async (payload) => {
   const { data } = await api.post('/api/memory/people', payload);
   return data;
+};
+
+export const updatePerson = async (personId, payload) => {
+  const { data } = await api.put(`/api/memory/people/${personId}`, payload);
+  return data;
+};
+
+export const deletePerson = async (personId) => {
+  await api.delete(`/api/memory/people/${personId}`);
+};
+
+// ── Memories ──────────────────────────────────────────────────────────────────
+
+export const getMemories = async (personId) => {
+  const { data } = await api.get(`/api/memory/${personId}`);
+  return data;
+};
+
+export const addMemory = async (personId, memory) => {
+  const { data } = await api.post(`/api/memory/${personId}`, memory);
+  return data;
+};
+
+export const deleteMemory = async (personId, memoryId) => {
+  await api.delete(`/api/memory/${personId}/memories/${memoryId}`);
+};
+
+export const getMemorySummary = async (personId) => {
+  const { data } = await api.get(`/api/memory/${personId}/summary`);
+  return data; // { summary }
 };
 
 // ── Conversation ──────────────────────────────────────────────────────────────

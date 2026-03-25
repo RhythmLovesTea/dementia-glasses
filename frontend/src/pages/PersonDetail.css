@@ -1,0 +1,334 @@
+/* PersonDetail Page */
+.pd-page {
+  min-height: 100svh;
+  background: #0f0f17;
+  color: #e2e0f0;
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.pd-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 28px;
+  border-bottom: 1px solid #1e1e2e;
+  background: #12121c;
+  flex-wrap: wrap;
+}
+
+.pd-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #efe9ff;
+  margin: 0;
+  flex: 1;
+}
+
+/* Loading */
+.pd-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6b6882;
+  font-size: 15px;
+  padding: 60px 28px;
+}
+
+.pd-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #2e2e45;
+  border-top-color: #8264ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error bars */
+.pd-error,
+.pd-error-bar {
+  background: rgba(232, 60, 78, 0.1);
+  border: 1px solid rgba(232, 60, 78, 0.35);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: #e83c4e;
+  margin: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Main */
+.pd-main {
+  flex: 1;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Profile */
+.pd-profile {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  background: #181826;
+  border: 1px solid #2a2a3e;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.pd-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #8264ff, #c06aff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 3px solid #2a2a3e;
+}
+
+.pd-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-initials {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pd-profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pd-profile-info h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #eceaf8;
+  margin: 0;
+}
+
+.pd-badge {
+  display: inline-block;
+  background: rgba(130, 100, 255, 0.15);
+  color: #a988ff;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.pd-notes {
+  font-size: 14px;
+  color: #6b6882;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Section headers */
+.pd-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.pd-section-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ccc9e0;
+  margin: 0;
+}
+
+/* Summary */
+.pd-summary-section {
+  background: #181826;
+  border: 1px solid #2a2a3e;
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+.pd-summary-text {
+  margin: 0;
+  padding: 16px;
+  background: rgba(130, 100, 255, 0.06);
+  border-left: 3px solid #8264ff;
+  border-radius: 0 10px 10px 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #d5d3e8;
+  font-style: italic;
+}
+
+/* Memories */
+.pd-memories-section {
+  background: #181826;
+  border: 1px solid #2a2a3e;
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+.pd-empty {
+  color: #4a4860;
+  font-size: 14px;
+  text-align: center;
+  padding: 32px 0;
+  margin: 0;
+}
+
+.pd-memories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.pd-memory-wrapper {
+  position: relative;
+}
+
+.pd-delete-mem-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(232, 60, 78, 0.15);
+  color: #e83c4e;
+  cursor: pointer;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.pd-memory-wrapper:hover .pd-delete-mem-btn {
+  opacity: 1;
+}
+
+.pd-delete-mem-btn:hover {
+  background: rgba(232, 60, 78, 0.4);
+}
+
+/* Add memory form */
+.pd-memory-form {
+  background: #12121c;
+  border: 1px solid #2a2a3e;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.pd-form-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pd-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b6882;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pd-label--grow { flex: 1; min-width: 180px; }
+
+.pd-input,
+.pd-select {
+  background: #1a1a2a;
+  border: 1px solid #2a2a3e;
+  border-radius: 10px;
+  padding: 10px 13px;
+  font-size: 14px;
+  color: #e2e0f0;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pd-input::placeholder { color: #3e3c52; }
+.pd-input:focus,
+.pd-select:focus {
+  border-color: #8264ff;
+  box-shadow: 0 0 0 3px rgba(130, 100, 255, 0.2);
+}
+
+.pd-textarea { resize: vertical; }
+
+.pd-form-error {
+  background: rgba(232, 60, 78, 0.1);
+  border: 1px solid rgba(232, 60, 78, 0.35);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #e83c4e;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn:hover:not(:disabled) { opacity: 0.88; }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary { background: #8264ff; color: #fff; }
+.btn-danger  { background: #e83c4e; color: #fff; }
+.btn-ghost   { background: rgba(255,255,255,0.07); color: #c5c3d8; }
+.btn-sm      { padding: 6px 12px; font-size: 12px; }
+
+.btn-back {
+  background: rgba(255,255,255,0.07);
+  border: none;
+  color: #9996ae;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-back:hover { background: rgba(255,255,255,0.12); color: #d0cde8; }
+
+@media (max-width: 600px) {
+  .pd-header { padding: 16px; }
+  .pd-main   { padding: 16px; gap: 16px; }
+  .pd-profile { flex-direction: column; align-items: center; text-align: center; }
+  .pd-memories-grid { grid-template-columns: 1fr; }
+}

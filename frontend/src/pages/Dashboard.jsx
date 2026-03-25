@@ -92,6 +92,9 @@ export default function Dashboard() {
           <button id="nav-dashboard" className="db-nav-item db-nav-item--active" aria-current="page">
             📡 Dashboard
           </button>
+          <button id="nav-people" className="db-nav-item" onClick={() => navigate('/people')}>
+            👥 People
+          </button>
           <button id="nav-add-person" className="db-nav-item" onClick={() => navigate('/add-person')}>
             ➕ Add Person
           </button>

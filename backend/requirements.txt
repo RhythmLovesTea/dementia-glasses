@@ -1,6 +1,11 @@
 fastapi
-uvicorn
-opencv-python
+uvicorn[standard]
+opencv-python-headless
 face-recognition
 numpy
 pillow
+sqlalchemy
+openai
+python-multipart
+python-dotenv
+pydantic

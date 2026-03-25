@@ -40,11 +40,20 @@ export default function AddPerson() {
     setLoading(true);
     setError(null);
     try {
-      // 1. Register face embedding
-      const { person_id } = await registerFace(capturedBlob, `${name.trim().replace(/\s+/g, '_')}.jpg`);
-      // 2. Save person metadata
-      await createPerson({ person_id, name: name.trim(), relationship: relationship.trim(), notes: notes.trim() });
-      setPersonId(person_id);
+      // 1. Register face encoding → { face_index, photo_url }
+      const { face_index, photo_url } = await registerFace(
+        capturedBlob,
+        `${name.trim().replace(/\s+/g, '_')}.jpg`,
+      );
+      // 2. Save person metadata with the face_index and photo_url
+      const person = await createPerson({
+        name: name.trim(),
+        relationship: relationship.trim() || null,
+        notes: notes.trim() || null,
+        photo_url,
+        face_index,
+      });
+      setPersonId(person.person_id);
       setStep(2);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to register person. Please try again.');
